@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+
+
+
+<div class="w-full sm:max-w-[800px] max-w-[340px] mx-auto rounded-2xl shadow-md bg-gray-800 border border-gray-700">
+
+    <div class="flex justify-between bg-[#EC7D72] p-4 rounded-t-lg items-center gap-2">
+        <a href="{% url 'tasks' %}" class="text-white">
+            <img width="30" height="30" src="https://img.icons8.com/ios/50/back--v1.png" alt="back--v1" />
+        </a>
+        <h1 class="text-2xl text-white">Add your task</h1>
+    </div>
+
+
+    <div class="p-5">
+
+        <form action="" method="post" class="text-white">
+            {% csrf_token %}
+
+            <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+            <input type="text" name="title" id="id_title"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6"
+                required>
+
+            <label for="id_description"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+            <textarea name="description" id="id_description"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6"></textarea>
+
+            <div class="relative max-w-sm mb-4">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                    </svg>
+                </div>
+                <input datepicker id="default-datepicker" name="dua_date" type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Select date">
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="bg-[#EC7D72] text-white font-bold py-2 px-4 rounded">Add</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+
+{% endblock content %}

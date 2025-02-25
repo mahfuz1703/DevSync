@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+
+<div class="w-full sm:max-w-[800px] max-w-[340px] mx-auto rounded-2xl shadow-md bg-gray-800 border border-gray-700">
+
+    <div class="flex justify-between bg-[#EC7D72] p-4 rounded-t-lg items-center gap-2">
+        <a href="{% url 'tasks' %}" class="text-white">
+            <img width="30" height="30" src="https://img.icons8.com/ios/50/back--v1.png" alt="back--v1" />
+        </a>
+        <h1 class="sm:text-2xl text-xl text-white">Login your account</h1>
+    </div>
+
+    <div class="mt-4 mb-4 p-5">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert-message text-red-500 max-w-sm mx-auto mb-4">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <form class="max-w-sm mx-auto" method="post">
+            {% csrf_token %}
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                <input type="text" id="username" name="username"
+                    class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
+                    placeholder="mahfuz" required />
+            </div>
+            <div class="mb-5">
+                <label for="password"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
+                <input type="password" id="password" name="password"
+                    class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
+                    required />
+            </div>
+            <div class="flex items-start mb-5">
+                <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Don't have any
+                    account? <a href="{% url 'signup' %}"
+                        class="text-blue-600 hover:underline dark:text-blue-500">Signup</a></label>
+            </div>
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+        </form>
+    </div>
+
+
+
+</div>
+
+{% endblock content %}

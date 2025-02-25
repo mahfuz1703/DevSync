@@ -1,0 +1,113 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="w-full sm:max-w-[800px] max-w-[340px] mx-auto rounded-2xl shadow-md bg-gray-800 border border-gray-700">
+
+    <div class="flex justify-between bg-[#EC7D72] p-4 rounded-t-lg items-center">
+        {% if request.user.is_authenticated %}
+        <div class="">
+            <h1 class="sm:text-[30px] text-[20px] dark:text-gray-900 font-semibold">Hello, {{request.user}}</h1>
+            <p class="sm:text-[18px] text-[14px] dark:text-gray-900 font-normal pt-3 pb-3">You have {{count}} incomplete tasks</p>
+        </div>
+        <div>
+            <form action="{% url 'signout' %}" method="post" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="text-white sm:text-[20px] text-[16px] mb-11">Logout</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
+        <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+            <div>
+                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
+                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    type="button">
+
+                    <a href="{% url 'createTask' %}">Add Task</a>
+                </button>
+            </div>
+            <label for="table-search" class="sr-only">Search</label>
+            <div>
+
+                <form action="" method="get" class="flex items-center gap-2">
+
+                    <input type="text" id="table-search" name="search" value="{{search_input}}"
+                        class="p-2  text-sm text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search for tasks">
+
+                    <input type="submit" value="Search"
+                        class="p-2  text-sm text-gray-900 border border-gray-300 rounded-lg w-20 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                </form>
+
+            </div>
+        </div>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="sm:text-xs text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                {% if tasks %}
+                <tr>
+                    <th scope="col" class="p-4">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Title
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dua date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                </tr>
+                {% else %}
+                <tr>
+                    <th scope="col" class="p-4">
+                        Tasks not found. Create <a href="{% url 'createTask' %}" class="text-[#EC7D72]">New Task</a>
+                    </th>
+                {% endif %}
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="w-4 p-4">
+                        <div class="flex items-center">
+                            <div class="w-[25px] h-[25px] bg-white rounded-full" {% if task.complete %} style="background-color: green;" {% endif %}></div>
+                        </div>
+                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href="{% url 'updateTask' task.id %}" {% if task.complete %} style="text-decoration: line-through;" {% endif %}>{{task.title}}</a>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{task.dua_date}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="{% url 'deleteTask' task.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <img width="30" height="30" src="https://img.icons8.com/offices/30/cancel.png" alt="cancel"/>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <td>{{task.title}}</td>
+    <td>{{task.description}}</td>
+    <td>{{task.complete}}</td>
+    <td>{{task.dua_date}}</td>
+    <td>{{task.created}}</td>
+    <td><a href="url 'task' task.id ">View</a></td>
+    <td><a href=" url 'updateTask' task.id ">Update</a></td>
+    <td><a href=" url 'deleteTask' task.id ">Delete</a></td> -->
+
+</div>
+
+{% endblock content %}
