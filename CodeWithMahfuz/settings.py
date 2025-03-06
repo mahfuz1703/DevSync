@@ -26,7 +26,6 @@ from dotenv import load_dotenv
 
 # SECURITY WARNING: keep the secret key used in production secret!'
 load_dotenv()  # Load environment variables from .env file
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
